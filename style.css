@@ -1,0 +1,27 @@
+.screen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  font-family: 'Libre Baskerville';
+  font-size: 1.5rem;
+}
+
+.question-wrapper {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.question-text {
+  padding: 10px;
+}
+
+.question-title {
+  padding: 10px;
+}
