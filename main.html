@@ -23,7 +23,9 @@
       firebase.initializeApp(config);
   </script>
 
+  <script src="task1.js"></script>
   <script src="script.js"></script>
+
 
   <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
 
@@ -34,28 +36,9 @@
 <body ng-app="experimentApp" ng-controller="experimentCtrl">
 
   <div class="screen" ng-if="!completed">
-    <div class="question-wrapper" ng-if="currentQuestion == 0">
-      <div class="question-title">Question 1/4</div>
-      <div class="question-text">Find the green circle</div>
-      <button ng-click="selectAnswer()">ANSWER</button>
-    </div>
-
-    <div class="question-wrapper" ng-if="currentQuestion == 1">
-      <div class="question-title">Question 2/4</div>
-      <div class="question-text">Find the circle</div>
-      <button ng-click="selectAnswer()">ANSWER</button>
-    </div>
-
-    <div class="question-wrapper" ng-if="currentQuestion == 2">
-      <div class="question-title">Question 3/4</div>
-      <div class="question-text">Find the green circle</div>
-      <button ng-click="selectAnswer()">ANSWER</button>
-    </div>
-
-    <div class="question-wrapper" ng-if="currentQuestion == 3">
-      <div class="question-title">Question 4/4</div>
-      <div class="question-text">Find the green circle</div>
-      <button ng-click="selectAnswer()">ANSWER</button>
+    <div class="question-wrapper" ng-if="questionPhase === 'SHOW_INSTRUCTIONS'">
+      <div class="question-title">Question {{currentQuestion + 1}}/4</div>
+      <div class="question-text">{{ QUESTIONS[currentQuestion].instructions }}</div>
     </div>
   </div>
 

@@ -24,4 +24,11 @@
 
 .question-title {
   padding: 10px;
+  font-size: 1rem;
+}
+
+.p5-container {
+  flex-grow: 1;
+  width: 100%;
+  background: rgba(255,0,0,0.25);
 }
