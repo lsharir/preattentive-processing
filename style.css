@@ -19,12 +19,17 @@
 }
 
 .question-text {
-  padding: 10px;
+  padding: 2rem 1rem;
+  font-size: 2rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 .question-title {
-  padding: 10px;
   font-size: 1rem;
+  padding: 2rem;
 }
 
 .p5-container {

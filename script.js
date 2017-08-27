@@ -8,10 +8,10 @@ var app = angular.module("experimentApp", ["firebase"])
     'ANSWERED': 'ANSWERED'
   })
   .constant('QUESTIONS', [
-    { instructions: 'Find the green circle?', task : task1 },
-    { instructions: 'Find the circle?', task: task1  },
-    { instructions: 'Find the green circle?', task: task1  },
-    { instructions: 'Find the green circle?', task: task1  }
+    { instructions: 'Touch the triangle', task : task1 },
+    { instructions: 'Touch the blue circle', task: task2  },
+    { instructions: 'Touch the blue triangle', task: task3  },
+    { instructions: 'Touch the blue triangle', task: task4  }
   ])
   .controller('experimentCtrl', function ($scope, $timeout, $firebaseArray, PHASES, QUESTIONS) {
     var ref = firebase.database().ref().child('results'),
@@ -21,9 +21,13 @@ var app = angular.module("experimentApp", ["firebase"])
       responses = [];
 
     $scope.QUESTIONS = QUESTIONS;
+    $scope.began = false;
 
     // Starts the questionnaire
-    nextQuestion();
+    $scope.beginQuestionnaire = function() {
+      $scope.began = true;
+      nextQuestion();
+    };
 
     function nextQuestion() {
       // Question navigation logic
