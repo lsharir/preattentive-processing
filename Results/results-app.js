@@ -4,19 +4,18 @@ var app = angular.module("resultsApp", ["firebase"])
       resultsDatabaseRef = $firebaseArray(ref);
 
       resultsDatabaseRef.$watch(function () {
-        var parsedData = {
-          0 : [],
-          1 : [],
-          2 : [],
-          3 : []
-        };
+        var parsedData = [
+          [],[],[],[]
+        ];
 
         resultsDatabaseRef.forEach(function (entry) {
           entry.responses.forEach(function (taskResponse, index) {
-            if (taskResponse.delta >= 0) {
+            if (taskResponse.delta >= 0 && taskResponse.delta <= 3000) {
               parsedData[index].push(taskResponse.delta);
             }
           });
+
+          refreshData(parsedData);
         });
 
         $scope.parsedData = parsedData;
