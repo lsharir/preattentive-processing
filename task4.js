@@ -1,4 +1,4 @@
-var task1 = function (p) {
+var task4 = function (p) {
   // Setup Parameters
   var object_relative_size = 70;
   var target_relative_position = 0.1;
@@ -8,8 +8,8 @@ var task1 = function (p) {
   var listeners = [];
 
   // Experiment Parameters
-  var target_r = 0, target_g = 0, target_b = 250; // target color
-  var non_target_r = 0, non_target_g = 0, non_target_b = 250; // non-target color
+  var target_r=0, target_g=0, target_b=250; // target color
+  var non_target_r=120, non_target_g=255, non_target_b=120; // non-target color
   var target_shape = "triangle", non_target_shape = "ellipse"; // shape definitions (ellipse or triangle only)
 
   p.addListener = function (fn) {
@@ -44,7 +44,7 @@ var task1 = function (p) {
         target_x = Math.max(Math.min(rand_x*p.windowWidth, p.windowWidth-(2*object_relative_size)), 2*object_relative_size);
         target_y = Math.max(Math.min(rand_y*p.windowHeight, p.windowHeight-(2*object_relative_size)), 2*object_relative_size);
       } else {
-        p.fill(non_target_r, non_target_g, non_target_b);
+        p.fill(p.getRandomInt(0, non_target_r), p.getRandomInt(0, non_target_g), p.getRandomInt(0, non_target_b));
         if (non_target_shape == "ellipse") {
           p.ellipse(rand_x * p.windowWidth, rand_y * p.windowHeight, object_relative_size, object_relative_size);
         } else if (non_target_shape == "triangle") {

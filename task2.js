@@ -1,4 +1,4 @@
-var task1 = function (p) {
+var task2 = function (p) {
   // Setup Parameters
   var object_relative_size = 70;
   var target_relative_position = 0.1;
@@ -8,9 +8,9 @@ var task1 = function (p) {
   var listeners = [];
 
   // Experiment Parameters
-  var target_r = 0, target_g = 0, target_b = 250; // target color
-  var non_target_r = 0, non_target_g = 0, non_target_b = 250; // non-target color
-  var target_shape = "triangle", non_target_shape = "ellipse"; // shape definitions (ellipse or triangle only)
+  var target_r=0, target_g=0, target_b=250; // target color
+  var non_target_r=120, non_target_g=255, non_target_b=120; // non-target color
+  var target_shape = "ellipse", non_target_shape = "ellipse"; // shape definitions (ellipse or triangle only)
 
   p.addListener = function (fn) {
     listeners.push(fn);
