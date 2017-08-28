@@ -33,42 +33,75 @@ var task1 = function (p) {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.background(255, 255, 255);
 
-    target_idx = p.getRandomInt(0, num_shapes);
-    for (var i = 0; i < num_shapes; i++) {
-      rand_x = Math.random();
-      rand_y = Math.random();
-      p.strokeWeight(2);
-      p.stroke(0, 0, 0);
-      if (i == target_idx) {
-        // Ensuring target has padding in canvas
-        target_x = Math.max(Math.min(rand_x*p.windowWidth, p.windowWidth-(2*object_relative_size)), 2*object_relative_size);
-        target_y = Math.max(Math.min(rand_y*p.windowHeight, p.windowHeight-(2*object_relative_size)), 2*object_relative_size);
-      } else {
-        p.fill(non_target_r, non_target_g, non_target_b);
-        if (non_target_shape == "ellipse") {
-          p.ellipse(rand_x * p.windowWidth, rand_y * p.windowHeight, object_relative_size, object_relative_size);
-        } else if (non_target_shape == "triangle") {
-          p.triangle((rand_x * p.windowWidth) - 0.5 * object_relative_size, (rand_y * p.windowHeight), (rand_x * p.windowWidth) + 0.5 * object_relative_size, (rand_y * p.windowHeight), (rand_x * p.windowWidth), (rand_y * p.windowHeight) - 0.8 * object_relative_size);
-        } else {
-          p.remove()
-        }
-      }
+    function targetCreationFunction(x, y, shapeSize) {
+      // Added a manual correction to the target placement
+      y += shapeSize / 4;
+      p.fill(non_target_r, non_target_g, non_target_b);
+      p.triangle(x - 0.5 * shapeSize, y, x + 0.5 * shapeSize, y, x, y - 0.8 * shapeSize);
+      
+      // return the target creation coordinates - important!
+      return [x, y];
     }
+
+    function nonTargetCreationFunction(x, y, shapeSize) {
+      p.fill(non_target_r, non_target_g, non_target_b);
+      p.ellipse(x, y, shapeSize, shapeSize);
+    }
+
+    var targetCoordinates = p.generateShapes(targetCreationFunction, nonTargetCreationFunction, object_relative_size, object_relative_size * 0.7, p.windowWidth, p.windowHeight);
+
+    target_x = targetCoordinates[0];
+    target_y = targetCoordinates[1];
+
     start_datetime = new Date();
   }
-  p.draw = function () {
 
-    //// Draw a target circle
-    p.strokeWeight(2);
-    p.stroke(0, 0, 0);
-    p.fill(target_r, target_g, target_b);
-    if (target_shape == "ellipse") {
-      p.ellipse(target_x, target_y, object_relative_size, object_relative_size);
-    } else if (target_shape == "triangle") {
-      p.triangle((target_x) - 0.5 * object_relative_size, (target_y), (target_x) + 0.5 * object_relative_size, (target_y), (target_x), (target_y) - 0.8 * object_relative_size);
-    } else {
-      p.remove()
+  // generateShapes : generate shapes througout the screen with 1 target (in a central area)
+  // returns targetArea = [target_x, target_y]
+  // targetCreationFunction(x, y, size) - must return creation coordinates
+  // nonTargetCreationFunction(x, y, size)
+  // shapeSize - required for spacing (shapeSize == size)
+  // spacingSize - how far objects will be place between another
+  // screenWidth - p.windowWidth
+  // screenHeight - p.windowHeight
+
+  p.generateShapes = function (targetCreationFunction, nonTargetCreationFunction, shapeSize, spacingSize, screenWidth, screenHeight) {
+    p.strokeWeight(0);
+
+    var step = shapeSize + spacingSize,
+      targetGenerated = false,
+      targetCoordinates = [0,0],
+      targetArea = [
+        screenWidth / 4 + Math.random() * screenWidth / 2,
+        screenHeight / 4 + Math.random() * screenHeight / 2
+      ];
+
+    for (var x = 0; x < screenWidth; x+= step) {
+      for (var y = 0; y < screenHeight; y+= step) {
+        rand_x = x + shapeSize / 2 + Math.random() * spacingSize;
+        rand_y = y + shapeSize / 2 + Math.random() * spacingSize;
+        
+        if (!targetGenerated && Math.abs(x - targetArea[0]) < shapeSize && Math.abs(y - targetArea[1]) < shapeSize) {
+          targetCoordinates = targetCreationFunction(rand_x, rand_y, shapeSize);
+          targetGenerated = true;
+          continue;
+        }
+        
+        nonTargetCreationFunction(rand_x, rand_y, shapeSize);
+      }
     }
+
+    // Safety, always generate 1 target!
+    if (!targetGenerated) {
+      targetCreationFunction(targetArea[0], targetArea[1], shapeSize);
+      targetCoordinates = targetArea;
+      targetGenerated = true;
+    }
+
+    return targetCoordinates;
+  }
+
+  p.draw = function () {
   }
 
   // When the user clicks the mouse
