@@ -1,3 +1,4 @@
-* make text unselectable
-* rephrase instructions (touch the circle) - and final page
-* make a start button (optional name)
+* task 1 - remove borders
+* task 2 - less vibrant difference
+* task 3 - 
+* task 4 - more triangles and more blue circle (target color)

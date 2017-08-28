@@ -16,7 +16,7 @@ var app = angular.module("experimentApp", ["firebase"])
   .controller('experimentCtrl', function ($scope, $timeout, $firebaseArray, PHASES, QUESTIONS) {
     var ref = firebase.database().ref().child('results'),
       resultsDatabaseRef = $firebaseArray(ref),
-      startTime = Date.now(),
+      startTime,
       questionTimeout,
       responses = [];
 
@@ -26,6 +26,7 @@ var app = angular.module("experimentApp", ["firebase"])
     // Starts the questionnaire
     $scope.beginQuestionnaire = function() {
       $scope.began = true;
+      startTime = Date.now();
       nextQuestion();
     };
 
