@@ -13,16 +13,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.min.js"></script>
   <script>
     var config = {
-        apiKey: "AIzaSyAobS5XYKXVRZP9LsRLRIFzQ8iydAKLX08",
-        authDomain: "preattentive-processing.firebaseapp.com",
-        databaseURL: "https://preattentive-processing.firebaseio.com",
-        projectId: "preattentive-processing",
-        storageBucket: "preattentive-processing.appspot.com",
-        messagingSenderId: "884929685567"
-      };
-      firebase.initializeApp(config);
+      apiKey: "AIzaSyAobS5XYKXVRZP9LsRLRIFzQ8iydAKLX08",
+      authDomain: "preattentive-processing.firebaseapp.com",
+      databaseURL: "https://preattentive-processing.firebaseio.com",
+      projectId: "preattentive-processing",
+      storageBucket: "preattentive-processing.appspot.com",
+      messagingSenderId: "884929685567"
+    };
+    firebase.initializeApp(config);
   </script>
 
+  <script src="shape-generator.js"></script>
   <script src="task1.js"></script>
   <script src="task2.js"></script>
   <script src="task3.js"></script>
@@ -41,7 +42,8 @@
   <div class="screen" ng-if="!began" ng-click="beginQuestionnaire()">
     <div class="question-wrapper">
       <div class="question-text">Click/touch anywhere when ready</div>
-      <div class="question-title">Complete the next 4 tasks, as fast as you can. Instructions will show for 5 seconds before each task. Complete a task by identifying the target and simply touch\click\tap it.</div>
+      <div class="question-title">Complete the next 4 tasks, as fast as you can. Instructions will show for 5 seconds before each task. Complete a task
+        by identifying the target and simply touch\click\tap it.</div>
     </div>
   </div>
 
@@ -58,8 +60,9 @@
     </div>
     <div class="question-wrapper">
       <div class="question-text">Your total time was {{totalTime / 1000 }} seconds</div>
-      <div class="question-title">Woah! This is the best score recorded so far. Not really, but we thought it will make you feel better for a little bit.</div>
-      </div>
+      <div class="question-title">Woah! This is the best score recorded so far. Not really, but we thought it will make you feel better for a little
+        bit.</div>
+    </div>
   </div>
 </body>
 

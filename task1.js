@@ -36,6 +36,7 @@ var task1 = function (p) {
     function targetCreationFunction(x, y, shapeSize) {
       // Added a manual correction to the target placement
       y += shapeSize / 4;
+      p.strokeWeight(0);      
       p.fill(non_target_r, non_target_g, non_target_b);
       p.triangle(x - 0.5 * shapeSize, y, x + 0.5 * shapeSize, y, x, y - 0.8 * shapeSize);
       
@@ -44,11 +45,12 @@ var task1 = function (p) {
     }
 
     function nonTargetCreationFunction(x, y, shapeSize) {
+      p.strokeWeight(0);      
       p.fill(non_target_r, non_target_g, non_target_b);
       p.ellipse(x, y, shapeSize, shapeSize);
     }
 
-    var targetCoordinates = p.generateShapes(targetCreationFunction, nonTargetCreationFunction, object_relative_size, object_relative_size * 0.7, p.windowWidth, p.windowHeight);
+    var targetCoordinates = generateShapes(targetCreationFunction, nonTargetCreationFunction, object_relative_size, object_relative_size * 0.7, p.windowWidth, p.windowHeight);
 
     target_x = targetCoordinates[0];
     target_y = targetCoordinates[1];
@@ -56,50 +58,6 @@ var task1 = function (p) {
     start_datetime = new Date();
   }
 
-  // generateShapes : generate shapes througout the screen with 1 target (in a central area)
-  // returns targetArea = [target_x, target_y]
-  // targetCreationFunction(x, y, size) - must return creation coordinates
-  // nonTargetCreationFunction(x, y, size)
-  // shapeSize - required for spacing (shapeSize == size)
-  // spacingSize - how far objects will be place between another
-  // screenWidth - p.windowWidth
-  // screenHeight - p.windowHeight
-
-  p.generateShapes = function (targetCreationFunction, nonTargetCreationFunction, shapeSize, spacingSize, screenWidth, screenHeight) {
-    p.strokeWeight(0);
-
-    var step = shapeSize + spacingSize,
-      targetGenerated = false,
-      targetCoordinates = [0,0],
-      targetArea = [
-        screenWidth / 4 + Math.random() * screenWidth / 2,
-        screenHeight / 4 + Math.random() * screenHeight / 2
-      ];
-
-    for (var x = 0; x < screenWidth; x+= step) {
-      for (var y = 0; y < screenHeight; y+= step) {
-        rand_x = x + shapeSize / 2 + Math.random() * spacingSize;
-        rand_y = y + shapeSize / 2 + Math.random() * spacingSize;
-        
-        if (!targetGenerated && Math.abs(x - targetArea[0]) < shapeSize && Math.abs(y - targetArea[1]) < shapeSize) {
-          targetCoordinates = targetCreationFunction(rand_x, rand_y, shapeSize);
-          targetGenerated = true;
-          continue;
-        }
-        
-        nonTargetCreationFunction(rand_x, rand_y, shapeSize);
-      }
-    }
-
-    // Safety, always generate 1 target!
-    if (!targetGenerated) {
-      targetCreationFunction(targetArea[0], targetArea[1], shapeSize);
-      targetCoordinates = targetArea;
-      targetGenerated = true;
-    }
-
-    return targetCoordinates;
-  }
 
   p.draw = function () {
   }
