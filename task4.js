@@ -2,14 +2,14 @@ var task4 = function (p) {
   // Setup Parameters
   var object_relative_size = 70;
   var target_relative_position = 0.1;
-  var num_shapes = 30;
+  var num_shapes = 20;
   var rand_x, rand_y, target_idx, target_x, target_y;
   var start_datetime, stop_datetime, time_delta;
   var listeners = [];
 
   // Experiment Parameters
-  var target_r=0, target_g=0, target_b=250; // target color
-  var non_target_r=120, non_target_g=255, non_target_b=120; // non-target color
+  var target_r=86, target_g=105, target_b=172; // target color
+  var non_target_r=206, non_target_g=72, non_target_b=42; // non-target color
   var target_shape = "triangle", non_target_shape = "ellipse"; // shape definitions (ellipse or triangle only)
 
   p.addListener = function (fn) {
@@ -37,14 +37,18 @@ var task4 = function (p) {
     for (var i = 0; i < num_shapes; i++) {
       rand_x = Math.random();
       rand_y = Math.random();
-      p.strokeWeight(2);
+      p.strokeWeight(0);
       p.stroke(0, 0, 0);
       if (i == target_idx) {
         // Ensuring target has padding in canvas
         target_x = Math.max(Math.min(rand_x*p.windowWidth, p.windowWidth-(2*object_relative_size)), 2*object_relative_size);
         target_y = Math.max(Math.min(rand_y*p.windowHeight, p.windowHeight-(2*object_relative_size)), 2*object_relative_size);
       } else {
-        p.fill(p.getRandomInt(0, non_target_r), p.getRandomInt(0, non_target_g), p.getRandomInt(0, non_target_b));
+        if (i> num_shapes/2){
+          p.fill(target_r, target_g, target_b);
+        } else {
+          p.fill(non_target_r, non_target_g, non_target_b);
+        }
         if (non_target_shape == "ellipse") {
           p.ellipse(rand_x * p.windowWidth, rand_y * p.windowHeight, object_relative_size, object_relative_size);
         } else if (non_target_shape == "triangle") {
@@ -54,12 +58,23 @@ var task4 = function (p) {
         }
       }
     }
+
+    for (var i = 0; i < 10; i ++) {
+      rand_x = Math.random();
+      rand_y = Math.random();
+      p.strokeWeight(0);
+      p.stroke(0, 0, 0);
+      p.fill(non_target_r, non_target_g, non_target_b);
+      p.triangle((rand_x*p.windowWidth)-0.5*object_relative_size, (rand_y*p.windowHeight), (rand_x*p.windowWidth)+0.5*object_relative_size, (rand_y*p.windowHeight), (rand_x*p.windowWidth), (rand_y*p.windowHeight)-0.8*object_relative_size);
+    }
+
+
     start_datetime = new Date();
   }
   p.draw = function () {
 
     //// Draw a target circle
-    p.strokeWeight(2);
+    p.strokeWeight(0);
     p.stroke(0, 0, 0);
     p.fill(target_r, target_g, target_b);
     if (target_shape == "ellipse") {

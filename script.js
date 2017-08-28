@@ -57,7 +57,7 @@ var app = angular.module("experimentApp", ["firebase"])
         task.addListener(function (response) {
           answerQuestion($scope.currentQuestion, { valid : response.valid, delta: response.delta });
         });
-        
+
         // Task phase timeout
         questionTimeout = $timeout(function () {
           $scope.questionPhase = PHASES.TIMEOUT;

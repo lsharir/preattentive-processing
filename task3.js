@@ -8,8 +8,8 @@ var task3 = function (p) {
   var listeners = [];
 
   // Experiment Parameters
-  var target_r=0, target_g=0, target_b=250; // target color
-  var non_target_r=120, non_target_g=255, non_target_b=120; // non-target color
+  var target_r=86, target_g=105, target_b=172; // target color
+  var non_target_r=206, non_target_g=72, non_target_b=42; // non-target color
   var target_shape = "triangle", non_target_shape = "ellipse"; // shape definitions (ellipse or triangle only)
 
   p.addListener = function (fn) {
@@ -37,7 +37,7 @@ var task3 = function (p) {
     for (var i = 0; i < num_shapes; i++) {
       rand_x = Math.random();
       rand_y = Math.random();
-      p.strokeWeight(2);
+      p.strokeWeight(0);
       p.stroke(0, 0, 0);
       if (i == target_idx) {
         // Ensuring target has padding in canvas
@@ -59,7 +59,7 @@ var task3 = function (p) {
   p.draw = function () {
 
     //// Draw a target circle
-    p.strokeWeight(2);
+    p.strokeWeight(0);
     p.stroke(0, 0, 0);
     p.fill(target_r, target_g, target_b);
     if (target_shape == "ellipse") {

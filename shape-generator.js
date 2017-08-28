@@ -1,5 +1,6 @@
 // generateShapes : generate shapes througout the screen with 1 target (in a central area)
 // returns targetArea = [target_x, target_y]
+// arguments:
 // targetCreationFunction(x, y, size) - must return creation coordinates
 // nonTargetCreationFunction(x, y, size)
 // shapeSize - required for spacing (shapeSize == size)
