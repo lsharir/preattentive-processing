@@ -37,10 +37,20 @@
 .question-title {
   font-size: 1rem;
   padding: 2rem;
+  text-align: center;
 }
 
 .p5-container {
   flex-grow: 1;
   width: 100%;
   background: rgba(255,0,0,0.25);
+}
+
+.hidden-joke {
+  transition: all 5s ease-in-out;
+  opacity: 0;
+}
+
+.hidden-joke.show {
+  opacity: 1;
 }

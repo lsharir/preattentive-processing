@@ -81,6 +81,10 @@ var app = angular.module("experimentApp", ["firebase"])
       $scope.totalTime = Date.now() - startTime;
       $scope.completed = true;
 
+      $timeout(function () {
+        $scope.joke = true;
+      }, 5000);
+
       resultsDatabaseRef.$add({
         responses: responses,
         duration: $scope.totalTime

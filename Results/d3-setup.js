@@ -1,6 +1,10 @@
-var margin = { top: 50, right: window.innerWidth / 15, bottom: 75, left: window.innerWidth / 15 },
-  width = window.innerWidth / 5 - margin.left - margin.right,
-  height = window.innerHeight - 100 - margin.top - margin.bottom;
+var svgWidth = window.innerWidth / 4.25,
+  boxWidth = 20,
+  taskImageSize = 0.14,
+  textSpace = (svgWidth - boxWidth) / 2,
+  margin = { top: 50, right: textSpace, bottom: 50, left: textSpace },
+  width = svgWidth - margin.left - margin.right,
+  height = window.innerHeight - window.innerWidth * taskImageSize - margin.top - margin.bottom;
 
 var min = Infinity,
   max = - Infinity;
@@ -26,12 +30,7 @@ window.onload = function () {
     .attr("height", height + margin.bottom + margin.top)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
-  svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", height + 50)
-    .attr("text-anchor", "middle")
-    .text(function (d,i) { return 'Task ' + (i + 1); });
+ 
   // Global function, used to apply a new data set
   window.refreshData = function (entries) {
     svg

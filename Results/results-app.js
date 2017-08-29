@@ -10,7 +10,7 @@ var app = angular.module("resultsApp", ["firebase"])
 
         resultsDatabaseRef.forEach(function (entry) {
           entry.responses.forEach(function (taskResponse, index) {
-            if (taskResponse.delta >= 0 && taskResponse.delta <= 3000) {
+            if (taskResponse.delta >= 0 && taskResponse.delta <= 5000) {
               parsedData[index].push(taskResponse.delta);
             }
           });

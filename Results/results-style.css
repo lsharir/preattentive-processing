@@ -7,7 +7,7 @@ body {
 }
 
 .box {
-  font: 30px sans-serif;
+  font: 20px sans-serif;
 }
 
 .box line,
@@ -25,4 +25,16 @@ body {
 .box .outlier {
   fill: none;
   stroke: #ccc;
+}
+
+#images-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#images-container img {
+  height: auto;
+  width: 10vw;
+  margin: 2vw 6.5vw;
 }

@@ -60,8 +60,10 @@
     </div>
     <div class="question-wrapper">
       <div class="question-text">Your total time was {{totalTime / 1000 }} seconds</div>
-      <div class="question-title">Woah! This is the best score recorded so far. Not really, but we thought it will make you feel better for a little
-        bit.</div>
+      <div class="question-title">
+        <div>Woah! That was fast! You performed better than everyone in the class!</div>
+        <div class="hidden-joke" ng-class="{ 'show' : joke }">(Not really, but we thought it will cheer you up for a little bit)</div>
+      </div>
     </div>
   </div>
 </body>
