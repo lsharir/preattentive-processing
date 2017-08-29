@@ -8,7 +8,8 @@ var task1 = function (p) {
   var listeners = [];
 
   // Experiment Parameters
-  var target_r=86, target_g=105, target_b=172; // target color
+  // used colors: blue [86, 105, 172], red [206, 72, 42]
+  var targetColor = [86, 105, 172]; // target color
   var nonTargetColor = [86, 105, 172]; // target color
   var target_shape = "triangle", non_target_shape = "ellipse"; // shape definitions (ellipse or triangle only)
 
@@ -29,7 +30,7 @@ var task1 = function (p) {
 
     function targetCreationFunction(x, y, shapeSize) {
       p.strokeWeight(0);
-      p.fill(target_r, target_g, target_b);
+      p.fill(targetColor[0], targetColor[1], targetColor[2]);
 
       if (target_shape == "ellipse") {
         p.ellipse(x, y, object_relative_size, object_relative_size);
@@ -58,7 +59,14 @@ var task1 = function (p) {
       }
     }
 
-    var targetCoordinates = generateShapes(targetCreationFunction, nonTargetCreationFunction, object_relative_size, object_relative_size * 0.7, p.windowWidth, p.windowHeight);
+    var targetCoordinates = generateShapes(
+      targetCreationFunction = targetCreationFunction,
+      nonTargetCreationFunction = nonTargetCreationFunction,
+      shapeSize = object_relative_size,
+      spacingSize = object_relative_size * 0.7,
+      screenWidth = p.windowWidth,
+      screenHeight = p.windowHeight
+    );
 
     target_x = targetCoordinates[0];
     target_y = targetCoordinates[1];
@@ -78,9 +86,9 @@ var task1 = function (p) {
       p.answer({ valid: true, delta: time_delta });
 
       // Pick new random color values
-      target_r = p.random(255);
-      target_g = p.random(255);
-      target_b = p.random(255);
+      targetColor[0] = p.random(255);
+      targetColor[1] = p.random(255);
+      targetColor[2] = p.random(255);
     }
   }
 

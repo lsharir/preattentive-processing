@@ -8,7 +8,14 @@
 // screenWidth - p.windowWidth
 // screenHeight - p.windowHeight
 
-var generateShapes = function (targetCreationFunction, nonTargetCreationFunction, shapeSize, spacingSize, screenWidth, screenHeight) {
+var generateShapes = function (
+  targetCreationFunction,
+  nonTargetCreationFunction,
+  shapeSize,
+  spacingSize,
+  screenWidth,
+  screenHeight
+) {
   var step = shapeSize + spacingSize,
     targetGenerated = false,
     targetCoordinates = [0, 0],
